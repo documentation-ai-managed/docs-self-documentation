@@ -1,0 +1,178 @@
+---
+title: Getting Started
+description: Step-by-step guide to setting up and using Self Documentation
+---
+
+## Setting Up Your First Project
+
+Getting started with Self Documentation is straightforward. Follow these steps to create your first documentation project and begin organizing your content.
+
+<Steps>
+  <Step title="Sign Up" icon="user">
+    Create your Self Documentation account using your email address or preferred authentication method.
+    
+    <CodeGroup tabs="Web,CLI">
+      ````bash
+      # Visit https://self-docs.com/signup
+      # Or use CLI for automated setup
+      self auth login --email your@email.com
+      ````
+      ````javascript
+      // Web signup via dashboard
+      // Navigate to https://self-docs.com/signup
+      ````
+    </CodeGroup>
+  </Step>
+  <Step title="Create Project" icon="folder">
+    Once logged in, create a new project to house your documentation.
+    
+    <CodeGroup tabs="Dashboard,CLI">
+      ````bash
+      self project create --name "My API Docs" --description "Documentation for my REST API"
+      ````
+      ````javascript
+      const project = await fetch('/api/projects', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer YOUR_TOKEN',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: "My API Docs",
+          description: "Documentation for my REST API"
+        })
+      });
+      ````
+    </CodeGroup>
+  </Step>
+  <Step title="Configure Structure" icon="settings">
+    Set up folders and categories to organize your documentation logically.
+  </Step>
+  <Step title="Import Content" icon="upload">
+    Upload existing markdown files or start writing new content directly in the editor.
+  </Step>
+</Steps>
+
+## Authentication and Access
+
+Self Documentation supports multiple authentication methods to ensure secure access to your documentation projects.
+
+<Tabs>
+  <Tab title="Email & Password" icon="mail">
+    Standard email and password authentication for individual users.
+    
+    <CodeGroup tabs="JavaScript,Python">
+      ````javascript
+      const auth = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: 'user@example.com',
+          password: 'securepassword'
+        })
+      });
+      const token = await auth.json();
+      ````
+      ````python
+      import requests
+      
+      response = requests.post('/api/auth/login', json={
+          'email': 'user@example.com',
+          'password': 'securepassword'
+      })
+      token = response.json()
+      ````
+    </CodeGroup>
+  </Tab>
+  <Tab title="OAuth" icon="key">
+    Integrate with popular identity providers like Google, GitHub, or enterprise SSO solutions.
+  </Tab>
+  <Tab title="API Keys" icon="terminal">
+    Generate API keys for programmatic access and automated workflows.
+    
+    <CodeGroup tabs="cURL,Bash">
+      ````bash
+      curl -X POST /api/keys \
+        -H "Authorization: Bearer YOUR_TOKEN" \
+        -d '{"name":"CI/CD Key","permissions":["read","write"]}'
+      ````
+      ````bash
+      # Using Self CLI
+      self keys create --name "CI/CD Key" --permissions read,write
+      ````
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+## Project Organization
+
+Effective organization is key to maintaining useful documentation. Self provides flexible tools for structuring your content.
+
+<Columns cols={2}>
+  <Card title="Folders" icon="folder" href="#folders">
+    Create hierarchical folder structures to group related documentation.
+  </Card>
+  <Card title="Tags" icon="tag" href="#tags">
+    Apply tags for cross-cutting categorization and advanced search.
+  </Card>
+</Columns>
+
+<Expandable title="Advanced Organization" default-open="false">
+  For complex projects, use nested folders, custom metadata fields, and automated categorization rules.
+  
+  <CodeGroup tabs="YAML,JSON">
+    ````yaml
+    project:
+      folders:
+        - name: "API Reference"
+          subfolders:
+            - "Endpoints"
+            - "Schemas"
+        - name: "Guides"
+          tags: ["tutorial", "how-to"]
+    ````
+    ````json
+    {
+      "project": {
+        "folders": [
+          {
+            "name": "API Reference",
+            "subfolders": ["Endpoints", "Schemas"]
+          },
+          {
+            "name": "Guides",
+            "tags": ["tutorial", "how-to"]
+          }
+        ]
+      }
+    }
+    ````
+  </CodeGroup>
+</Expandable>
+
+<Callout kind="info">Pro tip: Start with a simple structure and expand as your documentation grows. You can always reorganize later.</Callout>
+
+## Content Creation
+
+Self supports rich markdown editing with live preview and collaborative features.
+
+<Steps>
+  <Step title="Choose Editor" icon="edit">
+    Select between the web editor, desktop app, or API for content creation.
+  </Step>
+  <Step title="Write Content" icon="file-text">
+    Use markdown syntax with support for code blocks, tables, and embedded media.
+  </Step>
+  <Step title="Preview & Publish" icon="eye">
+    Preview changes before publishing to ensure accuracy and formatting.
+  </Step>
+</Steps>
+
+<ExpandableGroup>
+  <Expandable title="Markdown Features" default-open="false">
+    Self supports standard markdown plus extensions for tables, code highlighting, and inline HTML.
+  </Expandable>
+  <Expandable title="Version Control" default-open="false">
+    Every change is tracked, allowing you to view history and revert if needed.
+  </Expandable>
+</ExpandableGroup>

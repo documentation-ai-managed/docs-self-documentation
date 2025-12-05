@@ -1,0 +1,162 @@
+---
+title: Project Management
+description: Best practices for organizing and managing documentation projects in Self
+---
+
+## Project Lifecycle
+
+Managing documentation projects effectively requires understanding the full lifecycle from inception to maintenance.
+
+<Steps>
+  <Step title="Planning" icon="target">
+    Define project scope, audience, and content structure before starting.
+    
+    <CodeGroup tabs="Checklist,Template">
+      ````markdown
+      # Project Planning Checklist
+      - [ ] Define target audience
+      - [ ] Outline content structure
+      - [ ] Set up review process
+      - [ ] Plan maintenance schedule
+      ````
+      ````json
+      {
+        "project_plan": {
+          "audience": "developers",
+          "structure": ["introduction", "api", "examples"],
+          "reviewers": ["tech-writer", "dev-lead"],
+          "maintenance": "monthly"
+        }
+      }
+      ````
+    </CodeGroup>
+  </Step>
+  <Step title="Creation" icon="plus">
+    Build content using Self's collaborative editing tools.
+  </Step>
+  <Step title="Review" icon="check-circle">
+    Implement peer review processes to ensure quality and accuracy.
+  </Step>
+  <Step title="Publication" icon="send">
+    Publish approved content and set up access controls.
+  </Step>
+  <Step title="Maintenance" icon="refresh-cw">
+    Regularly update content and monitor usage analytics.
+  </Step>
+</Steps>
+
+## Access Control and Permissions
+
+Self provides granular permission controls to manage who can view, edit, or administer your documentation projects.
+
+<Tabs>
+  <Tab title="Roles" icon="users">
+    Assign roles like viewer, editor, and admin to team members.
+    
+    <CodeGroup tabs="API,CLI">
+      ````javascript
+      await fetch('/api/projects/123/permissions', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ADMIN_TOKEN',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userId: 'user456',
+          role: 'editor',
+          scope: 'full'
+        })
+      });
+      ````
+      ````bash
+      self permissions add --project 123 --user user456 --role editor
+      ````
+    </CodeGroup>
+  </Tab>
+  <Tab title="Groups" icon="user-plus">
+    Create user groups for easier permission management across multiple projects.
+  </Tab>
+  <Tab title="Policies" icon="shield">
+    Set organization-wide policies for security and compliance.
+  </Tab>
+</Tabs>
+
+<Callout kind="alert">Important: Regularly audit permissions to ensure former team members lose access when they leave.</Callout>
+
+## Version Management
+
+Track documentation versions to maintain accuracy as your projects evolve.
+
+<Columns cols={2}>
+  <Card title="Semantic Versioning" icon="tag" href="#semantic-versioning">
+    Use semantic versioning (major.minor.patch) for clear version progression.
+  </Card>
+  <Card title="Branching Strategy" icon="git-branch" href="#branching">
+    Implement branching for feature documentation and release management.
+  </Card>
+</Columns>
+
+<Expandable title="Advanced Versioning" default-open="false">
+  For complex projects, use version branches to maintain separate documentation for different product versions.
+  
+  <CodeGroup tabs="Git-like,YAML">
+    ````bash
+    # Create version branch
+    self branch create v2.0 --from main
+    # Switch to branch
+    self checkout v2.0
+    ````
+    ````yaml
+    versions:
+      - name: "v1.0"
+        status: "deprecated"
+      - name: "v2.0"
+        status: "current"
+      - name: "v3.0"
+        status: "beta"
+    ````
+  </CodeGroup>
+</Expandable>
+
+## Collaboration Workflows
+
+Effective collaboration ensures documentation quality and timeliness.
+
+<Steps>
+  <Step title="Assign Tasks" icon="clipboard">
+    Use task assignment to distribute documentation work among team members.
+  </Step>
+  <Step title="Review Process" icon="eye">
+    Implement structured review workflows with approval gates.
+  </Step>
+  <Step title="Feedback Integration" icon="message-square">
+    Collect and incorporate stakeholder feedback throughout the process.
+  </Step>
+</Steps>
+
+<ExpandableGroup>
+  <Expandable title="Review Best Practices" default-open="false">
+    Establish clear review criteria and use checklists to ensure comprehensive coverage.
+  </Expandable>
+  <Expandable title="Conflict Resolution" default-open="false">
+    Handle editing conflicts gracefully with merge tools and conflict resolution workflows.
+  </Expandable>
+</ExpandableGroup>
+
+## Analytics and Insights
+
+Monitor documentation usage to understand what content is most valuable and identify improvement areas.
+
+<Tabs>
+  <Tab title="Usage Metrics" icon="bar-chart">
+    Track page views, search queries, and user engagement patterns.
+  </Tab>
+  <Tab title="Content Performance" icon="trending-up">
+    Analyze which sections are most read and where users spend time.
+  </Tab>
+  <Tab title="Search Analytics" icon="search">
+    Review search terms to improve content discoverability.
+  </Tab>
+</Tabs>
+
+<Callout kind="tip">Use analytics data to prioritize documentation updates and identify gaps in coverage.</Callout>

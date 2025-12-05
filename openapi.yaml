@@ -1,0 +1,216 @@
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: Self Documentation API
+  license:
+    name: MIT
+servers:
+  - url: https://api.self-docs.com/v1
+paths:
+  /projects:
+    get:
+      summary: Retrieve a list of documentation projects available to the authenticated user. This endpoint supports pagination and filtering by project status or ownership. Returns detailed project information including metadata, creation dates, and access permissions.
+      operationId: listProjects
+      parameters:
+        - name: limit
+          in: query
+          description: Maximum number of projects to return per page (default 20, maximum 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: Successful response with paginated project list
+          headers:
+            x-next:
+              description: URL for the next page of results
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Projects'
+        default:
+          description: Unexpected error occurred during project retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new documentation project with specified configuration. This endpoint allows users to initialize projects with custom settings, templates, and initial content structure. Returns the created project details with generated identifiers and access tokens.
+      operationId: createProject
+      responses:
+        201:
+          description: Project successfully created
+        default:
+          description: Unexpected error during project creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /projects/{projectId}:
+    get:
+      summary: Fetch detailed information about a specific documentation project. This endpoint provides comprehensive project data including settings, content structure, team members, and recent activity. Useful for displaying project dashboards and configuration interfaces.
+      operationId: getProject
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: Unique identifier of the documentation project
+          schema:
+            type: string
+      responses:
+        200:
+          description: Project details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        default:
+          description: Unexpected error during project retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update an existing documentation project's configuration and settings. This endpoint supports modifying project metadata, access controls, and structural settings while preserving existing content and version history.
+      operationId: updateProject
+      responses:
+        200:
+          description: Project updated successfully
+        default:
+          description: Unexpected error during project update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /documents:
+    get:
+      summary: Retrieve a paginated list of documents across all accessible projects. This endpoint enables users to search and filter documents by various criteria including content type, modification date, and project association. Supports advanced querying for comprehensive document discovery.
+      operationId: listDocuments
+      parameters:
+        - name: projectId
+          in: query
+          description: Filter documents by specific project identifier
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: Documents retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Documents'
+        default:
+          description: Unexpected error during document retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new document within a specified documentation project. This endpoint handles document initialization with content templates, metadata assignment, and automatic indexing for search functionality. Supports various document formats and collaborative editing setup.
+      operationId: createDocument
+      responses:
+        201:
+          description: Document created successfully
+        default:
+          description: Unexpected error during document creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /documents/{documentId}:
+    get:
+      summary: Retrieve the complete content and metadata of a specific document. This endpoint provides full document information including version history, editing permissions, and related resources. Essential for document viewing and editing interfaces.
+      operationId: getDocument
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: Unique identifier of the document
+          schema:
+            type: string
+      responses:
+        200:
+          description: Document retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        default:
+          description: Unexpected error during document retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Project:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        ownerId:
+          type: string
+        status:
+          type: string
+          enum: [active, archived, draft]
+    Projects:
+      type: array
+      items:
+        $ref: '#/components/schemas/Project'
+    Document:
+      required:
+        - id
+        - title
+        - projectId
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        projectId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        authorId:
+          type: string
+        version:
+          type: integer
+        format:
+          type: string
+          enum: [markdown, html, plain]
+    Documents:
+      type: array
+      items:
+        $ref: '#/components/schemas/Document'
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

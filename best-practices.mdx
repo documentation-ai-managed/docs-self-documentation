@@ -1,0 +1,191 @@
+---
+title: Best Practices
+description: Proven strategies for creating and maintaining high-quality documentation
+---
+
+## Documentation Strategy
+
+Developing a comprehensive documentation strategy ensures your content remains valuable and accessible to users.
+
+<Columns cols={2}>
+  <Card title="Audience Analysis" icon="users" href="#audience-analysis">
+    Understand your users' needs and technical backgrounds to tailor content appropriately.
+  </Card>
+  <Card title="Content Planning" icon="clipboard" href="#content-planning">
+    Plan documentation structure and content roadmap to cover all necessary topics.
+  </Card>
+</Columns>
+
+<Tabs>
+  <Tab title="Writing Style" icon="edit">
+    Adopt a consistent, clear writing style that serves your audience's needs.
+    
+    <Expandable title="Style Guidelines" default-open="false">
+      Use active voice, present tense, and concise language. Define terms on first use and maintain consistency in terminology.
+      
+      <CodeGroup tabs="Good Example,Bad Example">
+        ````markdown
+        To authenticate, send your API key in the Authorization header.
+        
+        Example:
+        Authorization: Bearer your-api-key
+        ````
+        ````markdown
+        Your API key should be sent in the Authorization header for authentication purposes.
+        
+        For example:
+        Authorization: Bearer your-api-key
+        ````
+      </CodeGroup>
+    </Expandable>
+  </Tab>
+  <Tab title="Structure" icon="folder">
+    Organize content logically with clear navigation and information hierarchy.
+  </Tab>
+  <Tab title="Maintenance" icon="refresh-cw">
+    Establish processes for keeping documentation current and accurate.
+  </Tab>
+</Tabs>
+
+## Content Quality
+
+High-quality documentation requires attention to detail and user experience.
+
+<Steps>
+  <Step title="Accuracy" icon="check-circle">
+    Ensure all information is correct and up-to-date.
+  </Step>
+  <Step title="Completeness" icon="file-text">
+    Cover all necessary topics without overwhelming users.
+  </Step>
+  <Step title="Clarity" icon="eye">
+    Use clear language and visual aids to enhance understanding.
+  </Step>
+  <Step title="Consistency" icon="align-center">
+    Maintain uniform style, terminology, and formatting throughout.
+  </Step>
+</Steps>
+
+<Callout kind="info">Regular content audits help identify and fix quality issues before they impact users.</Callout>
+
+## Technical Writing Principles
+
+Apply established principles to create effective technical documentation.
+
+<ExpandableGroup>
+  <Expandable title="Progressive Disclosure" default-open="false">
+    Present information in layers, starting with basics and providing advanced details as needed.
+  </Expandable>
+  <Expandable title="Task-Oriented Writing" default-open="false">
+    Focus on user tasks rather than features, guiding users through actions step-by-step.
+  </Expandable>
+  <Expandable title="Minimalism" default-open="false">
+    Include only necessary information, avoiding unnecessary details that distract from core content.
+  </Expandable>
+</ExpandableGroup>
+
+## Tools and Automation
+
+Leverage Self's automation features to streamline documentation maintenance.
+
+<Columns cols={3}>
+  <Card title="Templates" icon="file" href="#templates">
+    Use consistent templates for common document types.
+  </Card>
+  <Card title="Automation" icon="zap" href="#automation">
+    Automate repetitive tasks and updates.
+  </Card>
+  <Card title="Review Workflows" icon="check" href="#review-workflows">
+    Implement structured review processes.
+  </Card>
+</Columns>
+
+<Expandable title="Automation Examples" default-open="false">
+  Set up automated checks and updates to maintain documentation quality.
+  
+  <CodeGroup tabs="Linting,CI Integration">
+    ````bash
+    # Lint documentation for style consistency
+    self lint --project my-docs --rules style-guide.yaml
+    ````
+    ````yaml
+    # CI pipeline for docs
+    name: Docs Check
+    on: [push]
+    jobs:
+      lint:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v2
+          - name: Lint Docs
+            run: self lint --project my-docs
+    ````
+  </CodeGroup>
+</Expandable>
+
+## Collaboration and Review
+
+Effective collaboration ensures documentation quality and accuracy.
+
+<Steps>
+  <Step title="Peer Review" icon="users">
+    Implement peer review processes for all documentation changes.
+  </Step>
+  <Step title="Stakeholder Feedback" icon="message-square">
+    Collect feedback from subject matter experts and end users.
+  </Step>
+  <Step title="Version Control" icon="git-branch">
+    Use version control to track changes and enable collaboration.
+  </Step>
+</Steps>
+
+<Tabs>
+  <Tab title="Review Checklist" icon="clipboard">
+    Create checklists to ensure comprehensive review coverage.
+    
+    <CodeGroup tabs="Markdown,JSON">
+      ````markdown
+      ## Documentation Review Checklist
+      - [ ] Accurate technical information
+      - [ ] Clear and concise language
+      - [ ] Complete code examples
+      - [ ] Working links and references
+      - [ ] Consistent formatting
+      - [ ] Appropriate for target audience
+      ````
+      ````json
+      {
+        "review_checklist": [
+          "accurate_technical_info",
+          "clear_language",
+          "complete_examples",
+          "working_links",
+          "consistent_formatting",
+          "appropriate_audience"
+        ]
+      }
+      ````
+    </CodeGroup>
+  </Tab>
+  <Tab title="Feedback Collection" icon="message-circle">
+    Gather user feedback through surveys and analytics.
+  </Tab>
+</Tabs>
+
+<Callout kind="tip">Establish clear review criteria and responsibilities to maintain consistent documentation quality.</Callout>
+
+## Measurement and Improvement
+
+Track documentation effectiveness and continuously improve based on data.
+
+<ExpandableGroup>
+  <Expandable title="Analytics Tracking" default-open="false">
+    Monitor usage patterns, search queries, and user engagement to identify improvement areas.
+  </Expandable>
+  <Expandable title="User Feedback" default-open="false">
+    Collect direct feedback through surveys, comments, and support interactions.
+  </Expandable>
+  <Expandable title="Continuous Improvement" default-open="false">
+    Regularly review and update documentation based on user needs and product changes.
+  </Expandable>
+</ExpandableGroup>

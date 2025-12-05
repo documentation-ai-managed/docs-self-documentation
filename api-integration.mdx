@@ -1,0 +1,209 @@
+---
+title: API Integration
+description: Connect your documentation projects to APIs for dynamic content and automation
+---
+
+## API-First Documentation
+
+Self Documentation integrates seamlessly with APIs to create dynamic, always-up-to-date documentation that reflects your latest changes.
+
+<Columns cols={3}>
+  <Card title="OpenAPI Import" icon="file-text" href="#openapi-import">
+    Import OpenAPI specifications to auto-generate comprehensive API documentation.
+  </Card>
+  <Card title="Dynamic Updates" icon="refresh-cw" href="#dynamic-updates">
+    Keep documentation synchronized with API changes through automated updates.
+  </Card>
+  <Card title="Interactive Testing" icon="play" href="#interactive-testing">
+    Include live API testing capabilities directly in your documentation.
+  </Card>
+</Columns>
+
+## OpenAPI Integration
+
+Import OpenAPI specifications to automatically generate detailed API reference documentation.
+
+<Steps>
+  <Step title="Prepare Spec" icon="file-text">
+    Ensure your OpenAPI specification is valid and complete.
+    
+    <CodeGroup tabs="JSON,YAML">
+      ````json
+      {
+        "openapi": "3.0.0",
+        "info": {
+          "title": "My API",
+          "version": "1.0.0"
+        },
+        "paths": {
+          "/users": {
+            "get": {
+              "summary": "List users",
+              "responses": {
+                "200": {
+                  "description": "Success"
+                }
+              }
+            }
+          }
+        }
+      }
+      ````
+      ````yaml
+      openapi: 3.0.0
+      info:
+        title: My API
+        version: 1.0.0
+      paths:
+        /users:
+          get:
+            summary: List users
+            responses:
+              '200':
+                description: Success
+      ````
+    </CodeGroup>
+  </Step>
+  <Step title="Import to Self" icon="upload">
+    Use the Self dashboard or API to import your specification.
+    
+    <CodeGroup tabs="Web,CLI">
+      ````bash
+      self api import --file spec.yaml --project my-project
+      ````
+      ````javascript
+      const formData = new FormData();
+      formData.append('spec', file);
+      formData.append('projectId', '123');
+      
+      await fetch('/api/projects/123/import', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer YOUR_TOKEN'
+        },
+        body: formData
+      });
+      ````
+    </CodeGroup>
+  </Step>
+  <Step title="Configure Display" icon="settings">
+    Customize how the API documentation appears in your project.
+  </Step>
+  <Step title="Publish" icon="send">
+    Make the API documentation available to your users.
+  </Step>
+</Steps>
+
+## Webhook Automation
+
+Set up webhooks to automatically update documentation when your API changes.
+
+<Tabs>
+  <Tab title="Git Integration" icon="git-branch">
+    Trigger documentation updates on code commits.
+    
+    <CodeGroup tabs="GitHub Actions,Webhook Config">
+      ````yaml
+      name: Update Docs
+      on:
+        push:
+          paths:
+            - 'api/**'
+      jobs:
+        update:
+          runs-on: ubuntu-latest
+          steps:
+            - name: Update Self Docs
+              run: |
+                curl -X POST ${{ secrets.SELF_WEBHOOK_URL }} \
+                  -H "Content-Type: application/json" \
+                  -d '{"action":"update","project":"my-api"}'
+      ````
+      ````json
+      {
+        "webhooks": [
+          {
+            "url": "https://self-docs.com/webhook/project-123",
+            "events": ["api_change"],
+            "secret": "webhook-secret"
+          }
+        ]
+      }
+      ````
+    </CodeGroup>
+  </Tab>
+  <Tab title="CI/CD Integration" icon="settings">
+    Integrate with your deployment pipeline for seamless updates.
+  </Tab>
+  <Tab title="Manual Triggers" icon="play">
+    Manually trigger updates when needed.
+  </Tab>
+</Tabs>
+
+<Callout kind="info">Webhook integration ensures your documentation always reflects the current state of your API.</Callout>
+
+## Interactive API Testing
+
+Embed live API testing capabilities directly in your documentation pages.
+
+<Expandable title="Testing Setup" default-open="false">
+  Configure interactive testing by providing API endpoints and authentication details.
+  
+  <CodeGroup tabs="Configuration,Example">
+    ````json
+    {
+      "testing": {
+        "baseUrl": "https://api.example.com",
+        "auth": {
+          "type": "bearer",
+          "tokenVar": "API_TOKEN"
+        },
+        "endpoints": [
+          "/users",
+          "/projects"
+        ]
+      }
+    }
+    ````
+    ````javascript
+    // Example API call in documentation
+    const response = await fetch('/api/users', {
+      headers: {
+        'Authorization': `Bearer ${API_TOKEN}`
+      }
+    });
+    const users = await response.json();
+    console.log(users);
+    ````
+  </CodeGroup>
+</Expandable>
+
+## API Documentation Best Practices
+
+Follow these guidelines to create effective API documentation.
+
+<Steps>
+  <Step title="Clear Descriptions" icon="file-text">
+    Provide detailed descriptions for all endpoints, parameters, and responses.
+  </Step>
+  <Step title="Code Examples" icon="code">
+    Include practical code examples in multiple languages.
+  </Step>
+  <Step title="Error Handling" icon="alert-triangle">
+    Document error codes and troubleshooting steps.
+  </Step>
+  <Step title="Versioning" icon="tag">
+    Clearly indicate API versioning and deprecation notices.
+  </Step>
+</Steps>
+
+<ExpandableGroup>
+  <Expandable title="Authentication Documentation" default-open="false">
+    Explain authentication methods, token acquisition, and security best practices.
+  </Expandable>
+  <Expandable title="Rate Limiting" default-open="false">
+    Document rate limits, headers, and strategies for handling limits.
+  </Expandable>
+</ExpandableGroup>
+
+<Callout kind="tip">Use Self's API documentation features to maintain consistency across all your API docs.</Callout>
