@@ -2,21 +2,18 @@
 title: Introduction
 description: Overview of Self Documentation and its core capabilities
 ---
+##
 
-## Getting Started with Self
-
-Self Documentation is your comprehensive platform for organizing and managing all your project documentation in one centralized space. Whether you're building APIs, maintaining codebases, or creating user guides, Self provides the tools to keep everything structured and accessible.
-
-Self streamlines documentation workflows by offering a unified interface where teams can create, update, and collaborate on docs without the complexity of scattered files or inconsistent formats.
-
-<Columns cols={3}>
-  <Card title="Project Management" icon="folder" href="#project-management">
+<Columns cols="3">
+  <Card title="Project Management" href="#project-management" icon="folder" horizontal="false">
     Organize your documentation projects efficiently with intuitive categorization and search capabilities.
   </Card>
-  <Card title="API Integration" icon="code" href="#api-integration">
+
+  <Card title="API Integration" href="#api-integration" icon="code" horizontal="false">
     Connect your documentation to APIs for dynamic content generation and automated updates.
   </Card>
-  <Card title="Team Collaboration" icon="users" href="#team-collaboration">
+
+  <Card title="Team Collaboration" href="#team-collaboration" icon="users" horizontal="false">
     Enable seamless collaboration with real-time editing, comments, and version control.
   </Card>
 </Columns>
@@ -26,9 +23,9 @@ Self streamlines documentation workflows by offering a unified interface where t
 <Tabs>
   <Tab title="Organization" icon="folder">
     Create hierarchical documentation structures that mirror your project's architecture. Use folders, tags, and search filters to find information quickly.
-    
-    <CodeGroup tabs="JavaScript,Python">
-      ````javascript
+
+    <CodeGroup show-lines="true" tabs={[]}>
+      ```javascript
       const project = {
         name: "My Documentation Project",
         folders: [
@@ -37,8 +34,9 @@ Self streamlines documentation workflows by offering a unified interface where t
         ],
         tags: ["api", "guide"]
       };
-      ````
-      ````python
+      ```
+
+      ```python
       project = {
         "name": "My Documentation Project",
         "folders": [
@@ -47,12 +45,14 @@ Self streamlines documentation workflows by offering a unified interface where t
         ],
         "tags": ["api", "guide"]
       }
-      ````
+      ```
     </CodeGroup>
   </Tab>
+
   <Tab title="Version Control" icon="git-branch">
     Track changes over time with built-in versioning that preserves document history and allows rollback to previous states.
   </Tab>
+
   <Tab title="Search & Discovery" icon="search">
     Powerful search functionality helps users find relevant documentation instantly across all projects.
   </Tab>
@@ -61,17 +61,19 @@ Self streamlines documentation workflows by offering a unified interface where t
 ## Quick Setup
 
 <Steps>
-  <Step title="Create Account" icon="user">
+  <Step title="Create Account" icon="user" title-type="p">
     Sign up for a Self Documentation account to get started with your first project.
   </Step>
-  <Step title="Set Up Project" icon="folder">
+
+  <Step title="Set Up Project" icon="folder" title-type="p">
     Create a new documentation project and define its structure.
-    
-    <CodeGroup tabs="CLI,API">
-      ````bash
+
+    <CodeGroup show-lines="true" tabs={[]}>
+      ```bash
       self init --project "My Project" --template basic
-      ````
-      ````javascript
+      ```
+
+      ```javascript
       const response = await fetch('/api/projects', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -80,39 +82,45 @@ Self streamlines documentation workflows by offering a unified interface where t
           template: "basic"
         })
       });
-      ````
+      ```
     </CodeGroup>
   </Step>
-  <Step title="Add Documentation" icon="file-text">
+
+  <Step title="Add Documentation" icon="file-text" title-type="p">
     Start adding your markdown files and organize them into appropriate folders.
   </Step>
-  <Step title="Invite Team" icon="users">
+
+  <Step title="Invite Team" icon="users" title-type="p">
     Collaborate by inviting team members and setting appropriate permissions.
   </Step>
 </Steps>
 
-<Callout kind="tip">Tip: Start with a small project to familiarize yourself with Self's interface before scaling to larger documentation initiatives.</Callout>
+Tip: Start with a small project to familiarize yourself with Self's interface before scaling to larger documentation initiatives.
 
 ## Use Cases
 
 Self Documentation serves various scenarios:
 
 - **API Documentation**: Generate and maintain comprehensive API docs from OpenAPI specifications.
+
 - **Product Guides**: Create user manuals, tutorials, and onboarding materials.
+
 - **Internal Knowledge Base**: Build a centralized repository for team processes and best practices.
+
 - **Project Documentation**: Track requirements, designs, and implementation details.
 
 <Expandable title="Advanced Configuration" default-open="false">
   For advanced users, Self supports custom themes, integrations with CI/CD pipelines, and automated publishing workflows. Configure webhooks to trigger updates when your codebase changes, ensuring documentation stays current.
-  
-  <CodeGroup tabs="YAML,JSON">
-    ````yaml
+
+  <CodeGroup show-lines="true" tabs={[]}>
+    ```yaml
     webhooks:
       - event: "code_push"
         action: "update_docs"
         target: "/api/docs"
-    ````
-    ````json
+    ```
+
+    ```json
     {
       "webhooks": [
         {
@@ -122,7 +130,7 @@ Self Documentation serves various scenarios:
         }
       ]
     }
-    ````
+    ```
   </CodeGroup>
 </Expandable>
 
@@ -134,7 +142,9 @@ If you encounter issues or need assistance, refer to our comprehensive help docu
   <Expandable title="Common Questions" default-open="false">
     Find answers to frequently asked questions about Self Documentation setup and usage.
   </Expandable>
+
   <Expandable title="Troubleshooting" default-open="false">
     Resolve common issues with import, export, and collaboration features.
   </Expandable>
 </ExpandableGroup>
+
